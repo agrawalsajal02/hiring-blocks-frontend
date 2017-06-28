@@ -23,7 +23,7 @@
 <script lang="ts">
   import Vue from 'vue'
   import Component from 'vue-class-component'
-  import store from 'src/store'
+  import store from '@/store'
   import { auth } from 'src/request'
 
   @Component

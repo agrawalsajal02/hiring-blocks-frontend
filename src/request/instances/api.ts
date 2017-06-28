@@ -9,4 +9,3 @@ const axiosApi = axios.create({
 })
 
 axiosApi.interceptors.request.use(interceptors.addBearerAuthToRequest)
-

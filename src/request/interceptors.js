@@ -1,7 +1,7 @@
 /**
  * Created by championswimmer on 27/06/17.
  */
-import store from '@/store'
+import store from 'src/store'
 
 export default {
   addBearerAuthToRequest: (config) => {
