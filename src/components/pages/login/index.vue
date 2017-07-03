@@ -8,7 +8,7 @@
         <b-form-input class="text-center" v-model="password" placeholder="password" type="password"></b-form-input>
         <div class="row">
           <div class="col"></div>
-          <div class="col-6 text-center">
+          <div class="col-lg-6 text-center">
             <b-button variant="success" @click="login()" type="lg">SUBMIT</b-button>
             <b-button variant="danger" type="lg">RESET</b-button>
           </div>
