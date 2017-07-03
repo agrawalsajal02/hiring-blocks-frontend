@@ -19,7 +19,7 @@
         <b-nav-item v-if="loggedIn" @click="loginToggle(false)" class="text-white">
           <span class="text-white">Logout</span>
         </b-nav-item>
-        <b-nav-item v-if="loggedIn" @click="loginToggle(false)" class="text-white">
+        <b-nav-item v-if="loggedIn" class="text-white">
           <router-link to="/profile" class="text-white">Profile</router-link>
         </b-nav-item>
         <b-nav-item v-else class="text-white">
@@ -31,13 +31,13 @@
 </template>
 
 <script lang="js">
-  import store from '@/store'
+  import store from 'src/store'
 
   export default {
     name: 'top-navbar',
     computed: {
       navItems () {
-        return store.state.topNavBarItems
+        return store.state.navigation.topNavBarItems
       },
       loggedIn () {
         return store.state['user'].loggedIn

@@ -18,6 +18,7 @@ module.exports = {
     'vue',
   ],
   rules: {
-    "semi": ["error", "never"]
+    "semi": ["error", "never"],
+    "no-console": ["error", { allow: ["warn", "error", "info"] }]
   }
 }

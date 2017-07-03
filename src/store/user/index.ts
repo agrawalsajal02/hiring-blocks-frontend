@@ -1,8 +1,15 @@
 /**
- * Created by championswimmer on 26/06/17.
+ * Created by championswimmer on 03/07/17.
  */
+import {Module} from 'vuex'
+import authApi from 'src/request/instances/auth'
 
-export default {
+export interface UserState {
+  token: String,
+  loggedIn: Boolean
+}
+
+export  default ((userModule: Module<UserState, any>) => userModule)({
   state: {
     loggedIn: false,
     token: null
@@ -24,8 +31,11 @@ export default {
         context.commit('logIn', value.token)
       } else {
         // try to log out user
-        context.commit('logOut')
+        authApi.unauthorize().then((res1) => {
+          console.info(res1)
+          context.commit('logOut')
+        })
       }
     }
   }
-}
+})

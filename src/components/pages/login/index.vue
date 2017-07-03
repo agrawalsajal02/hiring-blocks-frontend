@@ -34,7 +34,9 @@
     login () {
       auth.authorize(this.email, this.password)
         .then((response) => {
-          store.dispatch('handleLoginLogout', { token: response.data.token })
+          store.dispatch('handleLoginLogout', { token: response.data.token }).then(function (res1) {
+            console.info(res1)
+          })
         })
     }
   }
