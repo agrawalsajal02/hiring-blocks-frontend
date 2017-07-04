@@ -9,7 +9,8 @@ export interface UserState {
   loggedIn: Boolean
 }
 
-export  default ((userModule: Module<UserState, any>) => userModule)({
+
+export const module: Module<UserState, any> = {
   state: {
     loggedIn: false,
     token: null
@@ -38,4 +39,6 @@ export  default ((userModule: Module<UserState, any>) => userModule)({
       }
     }
   }
-})
+}
+
+export  default module
