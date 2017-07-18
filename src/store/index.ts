@@ -2,9 +2,9 @@
  * Created by championswimmer on 26/06/17.
  */
 import Vue from 'vue'
-import Vuex from 'vuex'
-import createPersistedState from 'vuex-persistedstate'
-import * as Cookies from 'js-cookie'
+import Vuex, {Payload, Store} from 'vuex'
+import VuexPersistence from 'vuex-persist'
+import Cookies from 'js-cookie'
 import {module as userModule, UserState} from './user'
 import navModule, {NavigationState} from './navigation'
 
@@ -16,34 +16,21 @@ export interface State {
 
 Vue.use(Vuex)
 
+const vuexCookie = new VuexPersistence<State, Payload>({
+  restoreState: (key, storage) => Cookies.getJSON(key),
+  saveState: (key, state, storage) => Cookies.set(key, state, {
+    expires: 3
+  }),
+  reducer: (state) => ({user: state.user}),
+  filter: (mutation) => (mutation.type == 'logIn' || mutation.type == 'logOut')
+})
+
 const store = new Vuex.Store<State>({
   modules: {
     user: userModule,
     navigation: navModule
   },
-  plugins: [
-    createPersistedState({
-      getState: (key) => Cookies.getJSON(key),
-      setState: (key, state) => Cookies.set(key, state, {
-        expires: 3
-        // FIXME: In production use secure cookies
-        // secure: true
-      }),
-      reducer (state) {
-        return {
-          user: state.user
-        }
-      },
-      filter (mutation) {
-        switch (mutation.type) {
-          case 'logIn': case 'logOut':
-            return true;
-          default:
-            return false;
-        }
-      }
-    })
-  ]
+  plugins: [vuexCookie.plugin]
 })
 
 export default store
